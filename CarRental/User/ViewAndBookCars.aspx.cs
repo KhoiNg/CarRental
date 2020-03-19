@@ -20,6 +20,10 @@ namespace CarRental.User
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!User.IsInRole(nameof(RoleType.User)))
+            {
+                Response.Redirect(GetRouteUrl("Default", null));
+            }
             if (!IsPostBack)
             {
                 StartDateFilter.Attributes["min"] = DateTime.Now.ToLocalTime().AddHours(6).ToString("yyyy-MM-ddTHH:mm");
@@ -28,7 +32,7 @@ namespace CarRental.User
 
                 EndDateFilter.Attributes["min"] = DateTime.Now.ToLocalTime().AddHours(6).ToString("yyyy-MM-ddTHH:mm");
                 EndDateFilter.Attributes["max"] = DateTime.Now.ToLocalTime().AddDays(30).ToString("yyyy-MM-ddTHH:mm");
-                EndDateFilter.Text = DateTime.Now.ToLocalTime().AddDays(30).ToString("yyyy-MM-ddTHH:mm");
+                EndDateFilter.Text = DateTime.Now.ToLocalTime().AddHours(6).AddDays(7).ToString("yyyy-MM-ddTHH:mm");
 
                 foreach (var type in Enum.GetNames(typeof(CarType)))
                 {
@@ -42,9 +46,15 @@ namespace CarRental.User
             var startDate = DateTime.Parse(StartDateFilter.Text);
             var endDate = DateTime.Parse(EndDateFilter.Text);
             var type = TypeFilter.Text;
+            var price = PriceFilter.Text;
+
             if (startDate > endDate)
             {
                 ErrorMessage.Text = "End Date cannot be less than Begin Date";
+            }
+            else if ((endDate - startDate).TotalDays > 7.0)
+            {
+                ErrorMessage.Text = "The maximum days that any car can be booked is 7 days";
             }
             else
             {
@@ -65,6 +75,14 @@ namespace CarRental.User
                 if (!string.IsNullOrEmpty(type))
                 {
                     filterCar = filterCar.Where(car => car.Type == type);
+                }
+                if (price == "Increasing")
+                {
+                    filterCar = filterCar.OrderBy(car => car.Price);
+                }
+                else if (price == "Decreasing")
+                {
+                    filterCar = filterCar.OrderByDescending(car => car.Price);
                 }
                 CarGridView.DataSource = filterCar;
                 CarGridView.DataBind();
@@ -95,7 +113,7 @@ namespace CarRental.User
                         UserId = userId
                     };
                     bookingRepository.AddBooking(booking);
-                    Response.Redirect("~/");
+                    Response.Redirect(GetRouteUrl("Default", null));
                 }
                 catch (Exception ex)
                 {

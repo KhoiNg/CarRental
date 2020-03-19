@@ -7,13 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CarRental.User
-{
-
-
-    public partial class ViewAndBookCars
-    {
-
+namespace CarRental.User {
+    
+    
+    public partial class ViewAndBookCars {
+        
         /// <summary>
         /// ErrorMessage control.
         /// </summary>
@@ -22,7 +20,7 @@ namespace CarRental.User
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ErrorMessage;
-
+        
         /// <summary>
         /// StartDateFilter control.
         /// </summary>
@@ -31,7 +29,7 @@ namespace CarRental.User
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox StartDateFilter;
-
+        
         /// <summary>
         /// EndDateFilter control.
         /// </summary>
@@ -40,7 +38,7 @@ namespace CarRental.User
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox EndDateFilter;
-
+        
         /// <summary>
         /// TypeFilter control.
         /// </summary>
@@ -49,7 +47,16 @@ namespace CarRental.User
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList TypeFilter;
-
+        
+        /// <summary>
+        /// PriceFilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList PriceFilter;
+        
         /// <summary>
         /// FilterButton control.
         /// </summary>
@@ -58,7 +65,7 @@ namespace CarRental.User
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button FilterButton;
-
+        
         /// <summary>
         /// CarGridView control.
         /// </summary>

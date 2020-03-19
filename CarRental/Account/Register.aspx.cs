@@ -43,7 +43,7 @@ namespace CarRental.Account
                     var authenticationManager = HttpContext.Current.GetOwinContext().Authentication;
                     var userIdentity = userManager.CreateIdentity(user, DefaultAuthenticationTypes.ApplicationCookie);
                     authenticationManager.SignIn(new AuthenticationProperties() { IsPersistent = false }, userIdentity);
-                    Response.Redirect("~/");
+                    Response.Redirect(GetRouteUrl("Default", null));
                 }
                 else
                 {

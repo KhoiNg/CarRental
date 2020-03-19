@@ -13,9 +13,9 @@ namespace CarRental.User
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            if(!User.IsInRole(nameof(RoleType.User)))
+            if (!User.IsInRole(nameof(RoleType.User)))
             {
-                Response.Redirect("~/");
+                Response.Redirect(GetRouteUrl("Default", null));
             }
         }
     }

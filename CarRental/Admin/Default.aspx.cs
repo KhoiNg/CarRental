@@ -15,7 +15,7 @@ namespace CarRental.Admin
         {
             if (!User.IsInRole(nameof(RoleType.Admin)))
             {
-                Response.Redirect("~/");
+                Response.Redirect(GetRouteUrl("Default", null));
             }
         }
     }

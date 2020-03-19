@@ -7,22 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CarRental.Admin
-{
-
-
-    public partial class ManageUsers
-    {
-
-        /// <summary>
-        /// ManageUsersGridView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView ManageUsersGridView;
-
+namespace CarRental.Admin {
+    
+    
+    public partial class ManageUsers {
+        
         /// <summary>
         /// ErrorMessage control.
         /// </summary>
@@ -31,5 +20,14 @@ namespace CarRental.Admin
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ErrorMessage;
+        
+        /// <summary>
+        /// ManageUsersGridView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView ManageUsersGridView;
     }
 }

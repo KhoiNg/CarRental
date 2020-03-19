@@ -14,6 +14,10 @@ namespace CarRental.Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!User.IsInRole(nameof(RoleType.Admin)))
+            {
+                Response.Redirect(GetRouteUrl("Default", null));
+            }
             if (!IsPostBack)
             {
                 LoadData();
@@ -91,9 +95,9 @@ namespace CarRental.Admin
                 CarInventoryGridView.EditIndex = -1;
                 LoadData();
             }
-            catch
+            catch (Exception ex)
             {
-                ErrorMessage.Text = "Problem with Updating";
+                ErrorMessage.Text = ex.Message;
             }
         }
 
@@ -111,9 +115,9 @@ namespace CarRental.Admin
                 carRepository.RemoveCar(id);
                 LoadData();
             }
-            catch
+            catch (Exception ex)
             {
-                ErrorMessage.Text = "Problem with Deleting";
+                ErrorMessage.Text = ex.Message;
             }
         }
 
@@ -147,13 +151,25 @@ namespace CarRental.Admin
                     carRepository.AddCar(car);
                     LoadData();
                 }
-                catch
+                catch (Exception ex)
                 {
-                    ErrorMessage.Text = "Problem with Adding";
+                    ErrorMessage.Text = ex.Message;
+                }
+            }
+            else if (e.CommandName.Equals("ViewCalendar"))
+            {
+                try
+                {
+                    GridViewRow row = (GridViewRow)(((Control)e.CommandSource).NamingContainer);
+                    var carId = (row.FindControl("Id_Item") as Label).Text;
+                    string url = GetRouteUrl("Admin_ViewCarCalendar", new { carId });
+                    Response.Redirect(url);
+                }
+                catch (Exception ex)
+                {
+                    ErrorMessage.Text = ex.Message;
                 }
             }
         }
-
-
     }
 }

@@ -7,13 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CarRental
-{
-
-
-    public partial class _Default
-    {
-
+namespace CarRental {
+    
+    
+    public partial class _Default {
+        
         /// <summary>
         /// Cheat control.
         /// </summary>

@@ -19,11 +19,11 @@ namespace CarRental
             {
                 if (User.IsInRole(nameof(RoleType.Admin)))
                 {
-                    Response.Redirect("~/Admin/");
+                    Response.Redirect(GetRouteUrl("Admin_Default", null));
                 }
                 else if (User.IsInRole(nameof(RoleType.User)))
                 {
-                    Response.Redirect("~/User/");
+                    Response.Redirect(GetRouteUrl("User_Default", null));
                 }
             }
         }

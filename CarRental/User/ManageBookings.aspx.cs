@@ -15,6 +15,10 @@ namespace CarRental.User
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!User.IsInRole(nameof(RoleType.User)))
+            {
+                Response.Redirect(GetRouteUrl("Default", null));
+            }
             if (!IsPostBack)
             {
                 LoadData();
@@ -45,6 +49,16 @@ namespace CarRental.User
                     ErrorMessage.Text = ex.Message;
                 }
             }
+        }
+
+        protected bool IsCancelable(string status, string startDate, string endDate)
+        {
+            DateTime start = DateTime.Parse(startDate).ToLocalTime();
+            DateTime end = DateTime.Parse(endDate).ToLocalTime();
+            DateTime now = DateTime.Now.ToLocalTime();
+            if ((now >= start && now <= end) || now >= end)
+                return false;
+            return status == nameof(BookingStatus.Booked);
         }
     }
 }

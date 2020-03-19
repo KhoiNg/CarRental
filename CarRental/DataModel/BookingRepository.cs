@@ -1,13 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 
 namespace CarRental.DataModel
 {
     public class BookingRepository
     {
-        readonly CarRentalContext _context = new CarRentalContext();
+        private readonly CarRentalContext _context = new CarRentalContext();
 
         public List<Booking> GetBookings()
         {
@@ -16,7 +15,12 @@ namespace CarRental.DataModel
 
         public List<Booking> GetBookingsByUser(string userId)
         {
-            return _context.Bookings.Where(booking => booking.UserId== userId).ToList();
+            return _context.Bookings.Where(booking => booking.UserId == userId).ToList();
+        }
+
+        public List<Booking> GetBookingsByCar(int carId)
+        {
+            return _context.Bookings.Where(booking => booking.CarId == carId).ToList();
         }
 
         public void AddBooking(Booking booking)
@@ -29,9 +33,25 @@ namespace CarRental.DataModel
 
         public void CancelBooking(int bookingId)
         {
-            var booking = _context.Bookings.FirstOrDefault(b => b.BookingId == bookingId);
-            booking.Status = nameof(BookingStatus.Canceled);
-            _context.SaveChanges();
+            var booking = _context.Bookings.Include("car").FirstOrDefault(b => b.BookingId == bookingId);
+            if (booking != null)
+            {
+                booking.Status = nameof(BookingStatus.Canceled);
+                _context.SaveChanges();
+            }
+        }
+
+        public void UpdatingBooking(int bookingId, DateTime startDate, DateTime endDate, string status, double cost)
+        {
+            var booking = _context.Bookings.Include("car").FirstOrDefault(b => b.BookingId == bookingId);
+            if (booking != null)
+            {
+                booking.StartDate = startDate;
+                booking.EndDate = endDate;
+                booking.Status = status;
+                booking.Cost = cost;
+                _context.SaveChanges();
+            }
         }
     }
 }

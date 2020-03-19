@@ -18,6 +18,10 @@ namespace CarRental.Admin
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!User.IsInRole(nameof(RoleType.Admin)))
+            {
+                Response.Redirect(GetRouteUrl("Default", null));
+            }
             if (!IsPostBack)
             {
                 LoadData();

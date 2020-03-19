@@ -1,17 +1,15 @@
-﻿<%@ Page Title="Manage Your Bookings" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ManageBookings.aspx.cs" Inherits="CarRental.User.ManageBookings" %>
+﻿<%@ Page Title="View Car Calendar" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ViewCarCalendar.aspx.cs" Inherits="CarRental.Admin.ViewCarCalendar" %>
 
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
-
-    <asp:LinkButton runat="server" Text="Back" CssClass="btn btn-primary btn-lg marginTopSmall" PostBackUrl="~/User/Default.aspx" />
+    <asp:LinkButton runat="server" Text="Back" CssClass="btn btn-primary btn-lg marginTopSmall" PostBackUrl="~/Admin/ManageCarInventory.aspx" />
     <hr />
     <h2><%: Title %>.</h2>
     <p class="text-danger">
         <asp:Literal runat="server" ID="ErrorMessage" />
     </p>
 
-    <asp:GridView ID="ManageBookingsGridView" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None"
-        AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" EmptyDataText="No Record found"
-        OnRowCommand="ManageBookingsGridView_RowCommand" CssClass="table table-hover table-bordered marginTopBig">
+    <asp:GridView ID="CarCalendarGridView" runat="server" CellPadding="4" ForeColor="#333333" GridLines="None"
+        CssClass="table table-hover table-bordered marginTopBig" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" EmptyDataText="No Record found">
         <AlternatingRowStyle BackColor="White" ForeColor="#284775" />
         <EditRowStyle BackColor="#999999" />
         <FooterStyle BackColor="#5D7B9D" Font-Bold="True" ForeColor="White" />
@@ -25,19 +23,19 @@
         <SortedDescendingHeaderStyle BackColor="#6F8DAE" />
 
         <Columns>
-            <asp:TemplateField Visible="false">
+            <asp:TemplateField HeaderText="Booking Id">
                 <ItemTemplate>
                     <asp:Label runat="server" ID="Id_Item" Text='<%#Bind("BookingId") %>' />
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Start Date">
                 <ItemTemplate>
-                    <asp:Label runat="server" ID="StartDate_Item" Text='<%#Bind("StartDate") %>' />
+                    <asp:Label runat="server" ID="Make_Item" Text='<%#Bind("StartDate") %>' />
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="End Date">
                 <ItemTemplate>
-                    <asp:Label runat="server" ID="EndDate_Item" Text='<%#Bind("EndDate") %>' />
+                    <asp:Label runat="server" ID="Model_Item" Text='<%#Bind("EndDate") %>' />
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Status">
@@ -50,14 +48,11 @@
                     <asp:Label runat="server" ID="Cost_Item" Text='<%#Bind("Cost") %>' />
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField>
+            <asp:TemplateField HeaderText="User Id">
                 <ItemTemplate>
-                    <asp:Button runat="server" Text="Cancel" CommandName="CancelBooking" CssClass="btn btn-primary btn-sm"
-                        OnClientClick="return confirm('Are you sure you want to Cancel this booking?'); "
-                        Enabled='<%# IsCancelable(Eval("Status").ToString(), Eval("StartDate").ToString(), Eval("EndDate").ToString()) %>' />
+                    <asp:Label runat="server" ID="UserId_Item" Text='<%#Bind("UserId") %>' />
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>
     </asp:GridView>
-
 </asp:Content>

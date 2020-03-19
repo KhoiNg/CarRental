@@ -10,7 +10,7 @@
 namespace CarRental.Admin {
     
     
-    public partial class ManageCarInventory {
+    public partial class ViewCarCalendar {
         
         /// <summary>
         /// ErrorMessage control.
@@ -22,12 +22,12 @@ namespace CarRental.Admin {
         protected global::System.Web.UI.WebControls.Literal ErrorMessage;
         
         /// <summary>
-        /// CarInventoryGridView control.
+        /// CarCalendarGridView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView CarInventoryGridView;
+        protected global::System.Web.UI.WebControls.GridView CarCalendarGridView;
     }
 }
