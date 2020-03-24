@@ -12,6 +12,7 @@ namespace CarRental.DataModel
     {
         private readonly UserManager<IdentityUser> userManager = new UserManager<IdentityUser>(new UserStore<IdentityUser>());
         private readonly RoleManager<IdentityRole> roleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>());
+        private readonly CarRentalContext _context = new CarRentalContext();
 
         public UserRepository()
         {
@@ -29,31 +30,37 @@ namespace CarRental.DataModel
             var users = userManager.Users.ToList();
             var roles = roleManager.Roles.ToList();
             var query = from user in users
-                        join role in roles
-                        on user.Roles.ToList()[0].RoleId equals role.Id
+                        join role in roles on user.Roles.ToList()[0].RoleId equals role.Id
+                        join personalUserInfo in _context.PersonalUserInfos on user.Id equals personalUserInfo.UserId
                         select new UserInfo
                         {
                             Id = user.Id,
                             Username = user.UserName,
                             Email = user.Email,
+                            FullName = personalUserInfo.FullName,
+                            PhoneNumber = personalUserInfo.PhoneNumber,
+                            Address = personalUserInfo.Address,
                             Role = role.Name
                         };
             return query.ToList();
         }
 
-        public IdentityResult CreateUser(string username, string email, string password, string role = nameof(RoleType.User))
+        public IdentityResult CreateUser(string username, string fullName, string phone, string address, string email, string password, string role = nameof(RoleType.User))
         {
             var user = new IdentityUser() { UserName = username, Email = email };
             IdentityResult result = userManager.Create(user, password);
             if (result.Succeeded)
             {
                 var addRoleResult = userManager.AddToRole(user.Id, role);
+                var personUserInfo = new PersonalUserInfo() { UserId = user.Id, FullName = fullName, PhoneNumber = phone, Address = address };
+                _context.PersonalUserInfos.Add(personUserInfo);
+                _context.SaveChanges();
                 return addRoleResult;
             }
             return result;
         }
 
-        public IdentityResult UpdateUserInfo(string id, string username, string email, string password, string role)
+        public IdentityResult UpdateUserInfo(string id, string username, string fullName, string phone, string address, string email, string password, string role)
         {
             var user = userManager.FindById(id);
             user.UserName = username;
@@ -67,13 +74,20 @@ namespace CarRental.DataModel
                 userManager.AddToRole(user.Id, role);
             }
             var result = userManager.Update(user);
-            return result;
-        }
 
-        public IdentityResult DeleteUser(string id)
-        {
-            var user = userManager.FindById(id);
-            var result = userManager.Delete(user);
+            var personalUserInfo = new PersonalUserInfo
+            {
+                UserId = id,
+                FullName = fullName,
+                PhoneNumber = phone,
+                Address = address
+            };
+            var personalUserInfoToUpdate = _context.PersonalUserInfos.FirstOrDefault(p => p.UserId == id);
+            if (personalUserInfoToUpdate != null)
+            {
+                _context.Entry(personalUserInfoToUpdate).CurrentValues.SetValues(personalUserInfo);
+                _context.SaveChanges();
+            }
             return result;
         }
     }
@@ -85,6 +99,12 @@ namespace CarRental.DataModel
         public string Username { get; set; }
 
         public string Email { get; set; }
+
+        public string FullName { get; set; }
+
+        public string PhoneNumber { get; set; }
+
+        public string Address { get; set; }
 
         public string Role { get; set; }
     }

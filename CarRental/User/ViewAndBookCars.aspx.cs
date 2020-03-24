@@ -1,12 +1,7 @@
-﻿using CarRental.Account;
-using CarRental.DataModel;
+﻿using CarRental.DataModel;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.EntityFramework;
-using Microsoft.Owin.Security;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
@@ -41,23 +36,36 @@ namespace CarRental.User
             }
         }
 
-        protected void FilterButton_Click(object sender, EventArgs e)
+        protected void Date_ServerValidate(object source, ServerValidateEventArgs args)
         {
             var startDate = DateTime.Parse(StartDateFilter.Text);
             var endDate = DateTime.Parse(EndDateFilter.Text);
-            var type = TypeFilter.Text;
-            var price = PriceFilter.Text;
-
             if (startDate > endDate)
             {
                 ErrorMessage.Text = "End Date cannot be less than Begin Date";
+                args.IsValid = false;
             }
             else if ((endDate - startDate).TotalDays > 7.0)
             {
                 ErrorMessage.Text = "The maximum days that any car can be booked is 7 days";
+                args.IsValid = false;
             }
             else
             {
+                ErrorMessage.Text = "";
+                args.IsValid = true;
+            }
+        }
+
+        protected void FilterButton_Click(object sender, EventArgs e)
+        {
+            if (IsValid)
+            {
+                var startDate = DateTime.Parse(StartDateFilter.Text);
+                var endDate = DateTime.Parse(EndDateFilter.Text);
+                var type = TypeFilter.Text;
+                var price = PriceFilter.Text;
+
                 var cars = carRepository.GetAvailableCars();
                 var filterCar = cars.Where(car =>
                 {

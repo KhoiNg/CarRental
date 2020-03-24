@@ -7,13 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CarRental.Account
-{
-
-
-    public partial class Register
-    {
-
+namespace CarRental.Account {
+    
+    
+    public partial class Register {
+        
         /// <summary>
         /// RegisterSection control.
         /// </summary>
@@ -22,7 +20,7 @@ namespace CarRental.Account
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.PlaceHolder RegisterSection;
-
+        
         /// <summary>
         /// ErrorMessage control.
         /// </summary>
@@ -31,7 +29,7 @@ namespace CarRental.Account
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ErrorMessage;
-
+        
         /// <summary>
         /// Email control.
         /// </summary>
@@ -40,7 +38,34 @@ namespace CarRental.Account
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Email;
-
+        
+        /// <summary>
+        /// FullName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox FullName;
+        
+        /// <summary>
+        /// Phone control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Phone;
+        
+        /// <summary>
+        /// Address control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox Address;
+        
         /// <summary>
         /// Password control.
         /// </summary>
@@ -49,7 +74,7 @@ namespace CarRental.Account
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox Password;
-
+        
         /// <summary>
         /// ConfirmPassword control.
         /// </summary>
@@ -58,7 +83,7 @@ namespace CarRental.Account
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ConfirmPassword;
-
+        
         /// <summary>
         /// AlreadyLoginSection control.
         /// </summary>

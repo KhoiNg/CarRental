@@ -12,7 +12,7 @@
         <%: Scripts.Render("~/bundles/modernizr") %>
     </asp:PlaceHolder>
 
-    <webopt:bundlereference runat="server" path="~/Content/css" />
+    <webopt:BundleReference runat="server" Path="~/Content/css" />
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
 
 </head>
@@ -42,6 +42,23 @@
             <div class="container">
                 <div class="navbar-header">
                     <a class="navbar-brand" runat="server" href="~/">Car Rental</a>
+                    <asp:LoginView ID="LoginView1" runat="server">
+                        <RoleGroups>
+                            <asp:RoleGroup Roles="User">
+                                <ContentTemplate>
+                                    <a class="navbar-brand" runat="server" href="~/User/ViewAndBookCars.aspx">Book Cars</a>
+                                    <a class="navbar-brand" runat="server" href="~/User/ManageBookings.aspx">Manage Bookings</a>
+                                </ContentTemplate>
+                            </asp:RoleGroup>
+                            <asp:RoleGroup Roles="Admin">
+                                <ContentTemplate>
+                                    <a class="navbar-brand" runat="server" href="~/Admin/ManageUsers.aspx"> Manage Users</a>
+                                    <a class="navbar-brand" runat="server" href="~/Admin/ManageCarInventory.aspx">Manage Car Inventory</a>
+                                    <a class="navbar-brand" runat="server" href="~/Admin/ManageBookings.aspx">Manage Bookings</a>
+                                </ContentTemplate>
+                            </asp:RoleGroup>
+                        </RoleGroups>
+                    </asp:LoginView>
                 </div>
                 <div class="navbar-collapse collapse">
                     <asp:LoginView runat="server" ViewStateMode="Disabled">

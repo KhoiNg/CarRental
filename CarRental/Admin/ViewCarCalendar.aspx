@@ -48,9 +48,9 @@
                     <asp:Label runat="server" ID="Cost_Item" Text='<%#Bind("Cost") %>' />
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="User Id">
+            <asp:TemplateField HeaderText="Full Name">
                 <ItemTemplate>
-                    <asp:Label runat="server" ID="UserId_Item" Text='<%#Bind("UserId") %>' />
+                    <asp:Label runat="server" ID="FullName_Item" Text='<%#Bind("FullName") %>' />
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

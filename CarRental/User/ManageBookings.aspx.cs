@@ -57,7 +57,9 @@ namespace CarRental.User
             DateTime end = DateTime.Parse(endDate).ToLocalTime();
             DateTime now = DateTime.Now.ToLocalTime();
             if ((now >= start && now <= end) || now >= end)
+            {
                 return false;
+            }
             return status == nameof(BookingStatus.Booked);
         }
     }

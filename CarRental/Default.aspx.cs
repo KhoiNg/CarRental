@@ -31,7 +31,7 @@ namespace CarRental
         protected void Cheat_Button(object sender, EventArgs e)
         {
             var userRepository = new UserRepository();
-            userRepository.CreateUser("admin@com", "admin@com", "123456", "Admin");
+            userRepository.CreateUser("admin@com", "Admin", "9999999999", "123 St", "admin@com", "123456", "Admin");
         }
     }
 }

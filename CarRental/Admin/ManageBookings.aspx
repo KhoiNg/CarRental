@@ -70,14 +70,15 @@
                     <asp:Label runat="server" ID="CarId_Item" Text='<%#Bind("CarId") %>' />
                 </ItemTemplate>
             </asp:TemplateField>
-            <asp:TemplateField HeaderText="User Id">
+            <asp:TemplateField HeaderText="Full Name">
                 <ItemTemplate>
-                    <asp:Label runat="server" ID="UserId_Item" Text='<%#Bind("UserId") %>' />
+                    <asp:Label runat="server" ID="FullName_Item" Text='<%#Bind("FullName") %>' />
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField>
                 <ItemTemplate>
-                    <asp:Button runat="server" Text="Edit" CommandName="Edit" CausesValidation="false" CssClass="btn btn-primary btn-sm" />
+                    <asp:Button runat="server" Text="Edit" CommandName="Edit" CausesValidation="false"
+                        Enabled='<%# IsEditable(Eval("Status").ToString()) %>' CssClass="btn btn-primary btn-sm" />
                 </ItemTemplate>
                 <EditItemTemplate>
                     <asp:Button runat="server" Text="Update" CommandName="Update" CssClass="btn btn-primary btn-sm" />

@@ -1,0 +1,4 @@
+﻿CREATE PROCEDURE [dbo].[GetAllCars]
+AS
+	SELECT * FROM Cars
+GO

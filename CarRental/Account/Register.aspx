@@ -19,6 +19,29 @@
                 </div>
             </div>
             <div class="form-group">
+                <asp:Label runat="server" AssociatedControlID="FullName" CssClass="col-md-2 control-label">Full Name</asp:Label>
+                <div class="col-md-10">
+                    <asp:TextBox runat="server" ID="FullName" CssClass="form-control" />
+                    <asp:RequiredFieldValidator runat="server" ControlToValidate="FullName"
+                        CssClass="text-danger" ErrorMessage="The full name field is required." />
+                </div>
+            </div>
+            <div class="form-group">
+                <asp:Label runat="server" AssociatedControlID="Phone" CssClass="col-md-2 control-label">Phone</asp:Label>
+                <div class="col-md-10">
+                    <asp:TextBox runat="server" ID="Phone" CssClass="form-control" TextMode="Number" />
+                    <asp:CustomValidator runat="server" ControlToValidate="Phone"
+                        CssClass="text-danger" OnServerValidate="Phone_ServerValidate" ErrorMessage="The Required Length for Phone is 10 Digits" />
+                </div>
+            </div>
+            <div class="form-group">
+                <asp:Label runat="server" AssociatedControlID="Address" CssClass="col-md-2 control-label">Address</asp:Label>
+                <div class="col-md-10">
+                    <asp:TextBox runat="server" ID="Address" CssClass="form-control" />
+                    <br />
+                </div>
+            </div>
+            <div class="form-group">
                 <asp:Label runat="server" AssociatedControlID="Password" CssClass="col-md-2 control-label">Password</asp:Label>
                 <div class="col-md-10">
                     <asp:TextBox runat="server" ID="Password" TextMode="Password" CssClass="form-control" />

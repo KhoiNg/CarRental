@@ -86,6 +86,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Core" />
     <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.Extensions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Drawing" />
@@ -149,6 +151,17 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Custom.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="DataModel\CarProcedure.sql" />
+    <Content Include="DataModel\GetAllCars.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GetAllCars.edmx</DependentUpon>
+      <LastGenOutput>GetAllCars.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DataModel\GetAllCars.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>GetAllCars.edmx</DependentUpon>
+      <LastGenOutput>GetAllCars.cs</LastGenOutput>
+    </Content>
     <Content Include="Default.aspx" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -161,6 +174,13 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <EntityDeploy Include="DataModel\GetAllCars.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>GetAllCars.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="DataModel\GetAllCars.edmx.diagram">
+      <DependentUpon>GetAllCars.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -258,6 +278,24 @@
     <Compile Include="DataModel\CarRepository.cs" />
     <Compile Include="DataModel\Classes.cs" />
     <Compile Include="DataModel\Enum.cs" />
+    <Compile Include="DataModel\GetAllCars.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetAllCars.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetAllCars.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetAllCars.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetAllCars.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>GetAllCars.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="DataModel\GetAllCars_Result.cs">
+      <DependentUpon>GetAllCars.tt</DependentUpon>
+    </Compile>
     <Compile Include="DataModel\UserRepository.cs" />
     <Compile Include="Default.aspx.cs">
       <DependentUpon>Default.aspx</DependentUpon>
@@ -328,6 +366,9 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

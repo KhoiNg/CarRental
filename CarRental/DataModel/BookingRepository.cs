@@ -8,9 +8,21 @@ namespace CarRental.DataModel
     {
         private readonly CarRentalContext _context = new CarRentalContext();
 
-        public List<Booking> GetBookings()
+        public List<BookingInfo> GetAllBookingInfos()
         {
-            return _context.Bookings.ToList();
+            var query = from booking in _context.Bookings
+                        join personalUserInfo in _context.PersonalUserInfos on booking.UserId equals personalUserInfo.UserId
+                        select new BookingInfo
+                        {
+                            BookingId = booking.BookingId,
+                            StartDate = booking.StartDate,
+                            EndDate = booking.EndDate,
+                            Status = booking.Status,
+                            Cost = booking.Cost,
+                            CarId = booking.CarId,
+                            FullName = personalUserInfo.FullName
+                        };
+            return query.ToList();
         }
 
         public List<Booking> GetBookingsByUser(string userId)
@@ -18,9 +30,21 @@ namespace CarRental.DataModel
             return _context.Bookings.Where(booking => booking.UserId == userId).ToList();
         }
 
-        public List<Booking> GetBookingsByCar(int carId)
+        public List<BookingInfo> GetBookingInfosByCar(int carId)
         {
-            return _context.Bookings.Where(booking => booking.CarId == carId).ToList();
+            var query = from booking in _context.Bookings.Where(booking => booking.CarId == carId)
+                        join personalUserInfo in _context.PersonalUserInfos on booking.UserId equals personalUserInfo.UserId
+                        select new BookingInfo
+                        {
+                            BookingId = booking.BookingId,
+                            StartDate = booking.StartDate,
+                            EndDate = booking.EndDate,
+                            Status = booking.Status,
+                            Cost = booking.Cost,
+                            CarId = booking.CarId,
+                            FullName = personalUserInfo.FullName
+                        };
+            return query.ToList();
         }
 
         public void AddBooking(Booking booking)
@@ -53,5 +77,22 @@ namespace CarRental.DataModel
                 _context.SaveChanges();
             }
         }
+    }
+
+    public class BookingInfo
+    {
+        public int BookingId { get; set; }
+
+        public DateTime StartDate { get; set; }
+
+        public DateTime EndDate { get; set; }
+
+        public string Status { get; set; }
+
+        public Double Cost { get; set; }
+
+        public int CarId { get; set; }
+
+        public string FullName { get; set; }
     }
 }

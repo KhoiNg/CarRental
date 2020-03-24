@@ -35,6 +35,7 @@
                 </asp:DropDownList>
             </div>
         </div>
+        <asp:CustomValidator runat="server" OnServerValidate="Date_ServerValidate"/>
         <asp:Button ID="FilterButton" runat="server" Text="Search" OnClick="FilterButton_Click" CssClass="btn btn-primary btn-lg " />
         <h4 class="marginTopBig">Note: You can only book a car more than 6 hours and less than 30 days away from current time. In addition,
             the maximum days that any car can be booked is 7 days.

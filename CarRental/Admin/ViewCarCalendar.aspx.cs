@@ -20,7 +20,7 @@ namespace CarRental.Admin
                 {
                     var carId = int.Parse(RouteData.Values["carId"].ToString());
                     BookingRepository bookingRepository = new BookingRepository();
-                    CarCalendarGridView.DataSource = bookingRepository.GetBookingsByCar(carId);
+                    CarCalendarGridView.DataSource = bookingRepository.GetBookingInfosByCar(carId);
                 }
                 catch (Exception ex)
                 {

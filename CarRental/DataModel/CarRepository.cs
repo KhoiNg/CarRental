@@ -15,11 +15,31 @@ namespace CarRental.DataModel
             return _context.Cars.ToList();
         }
 
+        public List<GetAllCars_Result> GetCarsTest()
+        {
+            using (var context = new CarRentalEntities())
+            {
+                return context.GetAllCars().ToList();
+            }
+        }
+
         public List<Car> GetAvailableCars()
         {
             return _context.Cars.Where(car => car.IsAvailable).Include(car => car.Bookings).ToList();
         }
 
+        public bool IsCarDeletable(int carId)
+        {
+            var car = _context.Cars.Include(c => c.Bookings).FirstOrDefault(c => c.CarId == carId);
+            if (car == null || car.Bookings.Count == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
 
         public void AddCar(Car car)
         {

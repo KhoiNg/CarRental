@@ -26,8 +26,13 @@ namespace CarRental.Admin
 
         protected void LoadData()
         {
-            ManageBookingGridView.DataSource = bookingRepository.GetBookings();
+            ManageBookingGridView.DataSource = bookingRepository.GetAllBookingInfos();
             ManageBookingGridView.DataBind();
+        }
+
+        protected bool IsEditable(string status)
+        {
+            return status == nameof(BookingStatus.Booked);
         }
 
         protected void ManageBookingGridView_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -37,11 +42,11 @@ namespace CarRental.Admin
                 if ((e.Row.RowState & DataControlRowState.Edit) > 0)
                 {
                     TextBox startDateTextBox = e.Row.FindControl("StartDate_Edit") as TextBox;
-                    var startDate = (e.Row.DataItem as Booking).StartDate;
+                    var startDate = (e.Row.DataItem as BookingInfo).StartDate;
                     startDateTextBox.Text = startDate.ToString("yyyy-MM-ddTHH:mm");
 
                     TextBox endDateTextBox = e.Row.FindControl("EndDate_Edit") as TextBox;
-                    var endDate = (e.Row.DataItem as Booking).EndDate;
+                    var endDate = (e.Row.DataItem as BookingInfo).EndDate;
                     endDateTextBox.Text = endDate.ToString("yyyy-MM-ddTHH:mm");
 
                     DropDownList statusList = e.Row.FindControl("Status_Edit") as DropDownList;
@@ -50,13 +55,6 @@ namespace CarRental.Admin
                         statusList.Items.Add(new ListItem(type, type));
                     }
                     statusList.DataBind();
-
-                    var statusText = (e.Row.DataItem as Booking).Status;
-                    statusList.Items.FindByValue(statusText).Selected = true;
-                    if (statusText == nameof(BookingStatus.Canceled))
-                    {
-                        statusList.Enabled = false;
-                    }
                 }
             }
         }

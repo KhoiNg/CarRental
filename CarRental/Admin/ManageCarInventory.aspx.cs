@@ -27,6 +27,7 @@ namespace CarRental.Admin
         protected void LoadData()
         {
             CarInventoryGridView.DataSource = carRepository.GetCars();
+            //CarInventoryGridView.DataSource = carRepository.GetCarsTest(); -- For testing out stored procedure
             CarInventoryGridView.DataBind();
         }
 
@@ -112,6 +113,11 @@ namespace CarRental.Admin
             try
             {
                 var id = int.Parse((CarInventoryGridView.Rows[e.RowIndex].FindControl("Id_Item") as Label).Text);
+                var isDeletable = carRepository.IsCarDeletable(id);
+                if (!isDeletable)
+                {
+                    throw new Exception("This car already have bookings - Cannot Delete!");
+                }
                 carRepository.RemoveCar(id);
                 LoadData();
             }
